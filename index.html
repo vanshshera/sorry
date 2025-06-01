@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sorry Isha Darling</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+
+    video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(60%);
+      display: none;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      padding: 20px;
+      width: 90%;
+      display: none;
+    }
+
+    .content h1 {
+      font-size: 7vw;
+      line-height: 1.2;
+      animation: fadeIn 3s ease-in-out infinite alternate;
+    }
+
+    .heart {
+      font-size: 10vw;
+      margin-top: 10px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0.5; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); color: pink; }
+      50% { transform: scale(1.2); color: red; }
+      100% { transform: scale(1); color: pink; }
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .overlay h2 {
+      font-size: 6vw;
+      margin-bottom: 20px;
+    }
+
+    .overlay button {
+      padding: 15px 25px;
+      font-size: 1rem;
+      background-color: hotpink;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video Background -->
+  <video id="apologyVideo" loop playsinline>
+    <source src="sorry.mp4" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+
+  <!-- Apology Content -->
+  <div class="content" id="apologyContent">
+    <h1>Sorry Isha darling</h1>
+    <div class="heart">💖</div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay">
+    <h2>Tap to hear my apology…</h2>
+    <button onclick="startApology()">Play</button>
+  </div>
+
+  <script>
+    function startApology() {
+      const video = document.getElementById('apologyVideo');
+      const content = document.getElementById('apologyContent');
+      const overlay = document.getElementById('overlay');
+
+      // Hide overlay
+      overlay.style.display = 'none';
+
+      // Show video & content
+      video.style.display = 'block';
+      content.style.display = 'block';
+
+      // Attempt to play video with sound
+      video.play().catch(err => {
+        alert("Please tap again to allow audio playback.");
+        console.error(err);
+      });
+    }
+  </script>
+
+</body>
+</html>
